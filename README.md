@@ -1,5 +1,7 @@
 # Shop products:
 
+Preview: https://blissful-bohr-fe2eff.netlify.com
+
 General features:
 
 - getting name, description, images from local data (JSON)
