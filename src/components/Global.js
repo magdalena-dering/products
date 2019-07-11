@@ -21,6 +21,7 @@ export default createGlobalStyle`
   }
   
   p {
+    color: ${color.blue};
     padding-bottom: 0.5rem
   }
   

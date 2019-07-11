@@ -19,7 +19,7 @@ General features:
 To run this project, install it locally using npm:
 
 ```
-$ cd ../shop-products
+$ cd ../products
 $ npm install
 $ npm start
 ```

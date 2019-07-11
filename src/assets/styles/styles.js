@@ -13,6 +13,10 @@ export const ProductUl = styled.ul`
 
 export const ProductLi = styled.li`
   color: ${color.blue};
+  cursor: pointer;
+  &:hover input {
+    visibility: visible;
+  }
   & > span {
     font-weight: bold;
   }
@@ -20,12 +24,12 @@ export const ProductLi = styled.li`
     border: unset;
     cursor: pointer;
     border: unset;
-    cursor: pointer;
     min-width: 30rem;
     box-shadow: rgba(50, 50, 93, 0.1) 0px 15px 35px,
       rgba(0, 0, 0, 0.07) 0px 5px 15px;
     padding: 1rem;
-    margin: 1rem;
+    margin: 0.5rem;
+    visibility: hidden;
     &:focus {
       outline: unset;
       text-decoration: underline;
@@ -34,7 +38,6 @@ export const ProductLi = styled.li`
   }
   & p {
     font-size: 1rem;
-    font-style: italic;
     padding: 0;
   }
 `;
