@@ -32,18 +32,18 @@ const ProductView = ({ match }) => {
   );
 
   const [valueImgName_01, setValueImgName_01] = useState(
-    localStorage.getItem(`productImgName_${productParam}`) || ""
+    localStorage.getItem(`productImgName_01${productParam}`) || ""
   );
   const [valueImgName_02, setValueImgName_02] = useState(
-    localStorage.getItem(`productImgName_${productParam}`) || ""
+    localStorage.getItem(`productImgName_02${productParam}`) || ""
   );
 
   useEffect(() => {
     localStorage.setItem(`productName_${productParam}`, valueName);
     localStorage.setItem(`productNumber_${productParam}`, valueNumber);
     localStorage.setItem(`productDesc_${productParam}`, valueDesc);
-    localStorage.setItem(`productImgName_${productParam}`, valueImgName_01);
-    localStorage.setItem(`productImgName_${productParam}`, valueImgName_02);
+    localStorage.setItem(`productImgName_01${productParam}`, valueImgName_01);
+    localStorage.setItem(`productImgName_02${productParam}`, valueImgName_02);
   }, [
     productParam,
     valueDesc,
@@ -64,8 +64,8 @@ const ProductView = ({ match }) => {
       {products
         .filter(product => productParam === getProductId(product.number))
         .map(product => {
-          const productImg1 = product.images[0];
-          const productImg2 = product.images[1];
+          const productImg01 = product.images[0];
+          const productImg02 = product.images[1];
 
           return (
             <div key={product.number}>
@@ -80,48 +80,33 @@ const ProductView = ({ match }) => {
                     <ProductUl>
                       <ProductLi>
                         <span>Name: </span>
-                        <input
-                          value={valueName}
-                          type="text"
-                          onChange={onChangeName}
-                        />
+                        <p>{valueName}</p>
+                        <input type="text" onChange={onChangeName} />
                       </ProductLi>
                       <ProductLi>
                         <span>Number: </span>
-                        <input
-                          value={valueNumber}
-                          type="text"
-                          onChange={onChangeNumber}
-                        />
+                        <p>{valueNumber}</p>
+                        <input type="text" onChange={onChangeNumber} />
                       </ProductLi>
                       <ProductLi>
                         <span>Description: </span>
-                        <input
-                          value={valueDesc}
-                          type="text"
-                          onChange={onChangeDesc}
-                        />
+                        <p>{valueDesc}</p>
+                        <input type="text" onChange={onChangeDesc} />
                       </ProductLi>
-                      {productImg1 && (
+                      {productImg01 && (
                         <ProductLi>
                           <span>Image name1: </span>
-                          <input
-                            value={valueImgName_01}
-                            type="text"
-                            onChange={onChangeImgName01}
-                          />
-                          <IMG src={productImg1.url} alt="product-img" />
+                          <p>{valueImgName_01}</p>
+                          <input type="text" onChange={onChangeImgName01} />
+                          <IMG src={productImg01.url} alt="product-img" />
                         </ProductLi>
                       )}
-                      {productImg2 && (
+                      {productImg02 && (
                         <ProductLi>
                           <span>Image name2: </span>
-                          <input
-                            value={valueImgName_02}
-                            type="text"
-                            onChange={onChangeImgName02}
-                          />
-                          <IMG src={productImg2.url} alt="product-img" />
+                          <p>{valueImgName_02}</p>
+                          <input type="text" onChange={onChangeImgName02} />
+                          <IMG src={productImg02.url} alt="product-img" />
                         </ProductLi>
                       )}
                     </ProductUl>
