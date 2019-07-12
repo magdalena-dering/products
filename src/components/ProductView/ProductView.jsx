@@ -53,8 +53,6 @@ const ProductView = ({ match }) => {
     valueNumber
   ]);
 
-  console.log(typeof valueName);
-
   const onChangeName = event => setValue(event.target.value);
   const onChangeNumber = event => setValueNumber(event.target.value);
   const onChangeDesc = event => setValueDesc(event.target.value);
