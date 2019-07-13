@@ -23,15 +23,12 @@ export const ProductLi = styled.li`
   & > input {
     border: unset;
     cursor: pointer;
-    border: unset;
-    min-width: 30rem;
     box-shadow: rgba(50, 50, 93, 0.1) 0px 15px 35px,
       rgba(0, 0, 0, 0.07) 0px 5px 15px;
     padding: 1rem;
-    margin: 0.5rem;
+    margin: 1rem;
     visibility: hidden;
     &:focus {
-      outline: unset;
       text-decoration: underline;
       text-decoration-color: ${color.imperial};
     }

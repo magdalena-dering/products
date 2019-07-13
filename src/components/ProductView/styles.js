@@ -7,8 +7,8 @@ export const Card = styled.div`
 `;
 
 export const IMG = styled.img`
-  height: 100%;
-  margin: 2rem;
   box-shadow: rgba(50, 50, 93, 0.1) 0px 15px 35px,
     rgba(0, 0, 0, 0.07) 0px 5px 15px;
+  width: 6rem;
+  position: absolute;
 `;
