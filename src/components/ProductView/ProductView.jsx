@@ -46,11 +46,11 @@ const ProductView = ({ match }) => {
     localStorage.setItem(`productImgName_02${productParam}`, valueImgName_02);
   }, [
     productParam,
+    valueName,
+    valueNumber,
     valueDesc,
     valueImgName_01,
-    valueImgName_02,
-    valueName,
-    valueNumber
+    valueImgName_02
   ]);
 
   const onChangeName = event => setValue(event.target.value);
