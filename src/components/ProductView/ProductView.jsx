@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col } from "react-grid-system";
 import { getProductId } from "../../utils/_utils";
-import { H1, ProductUl, ProductLi } from "../../assets/styles/styles";
+import { Wrapper, H1, ProductUl, ProductLi } from "../../assets/styles/styles";
 import { Card, IMG } from "./styles";
 
 const ProductView = ({ match }) => {
@@ -66,14 +66,9 @@ const ProductView = ({ match }) => {
         .map(product => {
           const productImg01 = product.images[0];
           const productImg02 = product.images[1];
-
           return (
-            <div key={product.number}>
-              <Row>
-                <Col>
-                  <H1>Product detail</H1>
-                </Col>
-              </Row>
+            <Wrapper key={product.number}>
+              <H1>Product detail</H1>
               <Row>
                 <Col lg={6}>
                   <Card>
@@ -125,7 +120,7 @@ const ProductView = ({ match }) => {
                   </Card>
                 </Col>
               </Row>
-            </div>
+            </Wrapper>
           );
         })}
     </>

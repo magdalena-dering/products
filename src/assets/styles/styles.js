@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import color from "../../constants/colors";
 
+export const Wrapper = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`;
+
 export const H1 = styled.h1`
   color: ${color.imperial};
   text-align: center;
