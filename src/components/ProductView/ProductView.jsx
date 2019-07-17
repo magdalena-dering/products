@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col } from "react-grid-system";
+import firebase from "../../constants/firebase";
 import { getProductId } from "../../utils/_utils";
 import { H1, ProductUl, ProductLi } from "../../assets/styles/styles";
 import { Card, IMG } from "./styles";
@@ -20,114 +21,56 @@ const ProductView = ({ match }) => {
   }, []);
 
   const productParam = getProductId(match.params.productId);
+  const productName = products
+    .filter(product => productParam === getProductId(product.number))
+    .map(product => product.name);
+  const productNumber = products
+    .filter(product => productParam === getProductId(product.number))
+    .map(product => product.number);
 
-  const [valueName, setValue] = useState(
-    localStorage.getItem(`productName_${productParam}`) || ""
-  );
-  const [valueNumber, setValueNumber] = useState(
-    localStorage.getItem(`productNumber_${productParam}`) || ""
-  );
-  const [valueDesc, setValueDesc] = useState(
-    localStorage.getItem(`productDesc_${productParam}`) || ""
-  );
-
-  const [valueImgName_01, setValueImgName_01] = useState(
-    localStorage.getItem(`productImgName_01${productParam}`) || ""
-  );
-  const [valueImgName_02, setValueImgName_02] = useState(
-    localStorage.getItem(`productImgName_02${productParam}`) || ""
-  );
-
-  useEffect(() => {
-    localStorage.setItem(`productName_${productParam}`, valueName);
-    localStorage.setItem(`productNumber_${productParam}`, valueNumber);
-    localStorage.setItem(`productDesc_${productParam}`, valueDesc);
-    localStorage.setItem(`productImgName_01${productParam}`, valueImgName_01);
-    localStorage.setItem(`productImgName_02${productParam}`, valueImgName_02);
-  }, [
-    productParam,
-    valueName,
-    valueNumber,
-    valueDesc,
-    valueImgName_01,
-    valueImgName_02
-  ]);
-
-  const onChangeName = event => setValue(event.target.value);
-  const onChangeNumber = event => setValueNumber(event.target.value);
-  const onChangeDesc = event => setValueDesc(event.target.value);
-  const onChangeImgName01 = event => setValueImgName_01(event.target.value);
-  const onChangeImgName02 = event => setValueImgName_02(event.target.value);
+  const onSubmit = e => {
+    e.preventDefault();
+    firebase
+      .firestore()
+      .collection("products")
+      .add({
+        productName
+      });
+    // .then(() => {
+    //   setProducts([]);
+    // });
+    console.log(productName);
+  };
 
   return (
     <>
-      {products
-        .filter(product => productParam === getProductId(product.number))
-        .map(product => {
-          const productImg01 = product.images[0];
-          const productImg02 = product.images[1];
-
-          return (
-            <div key={product.number}>
-              <Row>
-                <Col>
-                  <H1>Product detail</H1>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg={6}>
-                  <Card>
-                    <ProductUl>
-                      <ProductLi>
-                        <span>Name: </span>
-                        <p>{valueName === "" ? product.name : valueName}</p>
-                        <input type="text" onChange={onChangeName} />
-                      </ProductLi>
-                      <ProductLi>
-                        <span>Number: </span>
-                        <p>
-                          {valueNumber === "" ? product.number : valueNumber}
-                        </p>
-                        <input type="text" onChange={onChangeNumber} />
-                      </ProductLi>
-                      <ProductLi>
-                        <span>Description: </span>
-                        <p>
-                          {valueDesc === "" ? product.description : valueDesc}
-                        </p>
-                        <input type="text" onChange={onChangeDesc} />
-                      </ProductLi>
-                      {productImg01 && (
-                        <ProductLi>
-                          <span>Image name1: </span>
-                          <p>
-                            {valueImgName_01 === ""
-                              ? productImg01.name
-                              : valueImgName_01}
-                          </p>
-                          <input type="text" onChange={onChangeImgName01} />
-                          <IMG src={productImg01.url} alt="product-img" />
-                        </ProductLi>
-                      )}
-                      {productImg02 && (
-                        <ProductLi>
-                          <span>Image name2: </span>
-                          <p>
-                            {valueImgName_02 === ""
-                              ? productImg02.name
-                              : valueImgName_02}
-                          </p>
-                          <input type="text" onChange={onChangeImgName02} />
-                          <IMG src={productImg02.url} alt="product-img" />
-                        </ProductLi>
-                      )}
-                    </ProductUl>
-                  </Card>
-                </Col>
-              </Row>
-            </div>
-          );
-        })}
+      <div key={productNumber}>
+        <Row>
+          <Col>
+            <H1>Product detail</H1>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6}>
+            <Card>
+              <form onSubmit={onSubmit}>
+                <ProductUl>
+                  <ProductLi>
+                    <span>Name: </span>
+                    <p>{productName}</p>
+                    <input
+                      type="text"
+                      value={productName}
+                      onChange={e => setProducts(e.currentTarget.value)}
+                    />
+                  </ProductLi>
+                </ProductUl>
+              </form>
+              <button>Add</button>
+            </Card>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };

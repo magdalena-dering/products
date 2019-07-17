@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import color from "../../constants/colors";
 
+export const Wrapper = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`;
+
 export const H1 = styled.h1`
   color: ${color.imperial};
   text-align: center;
@@ -37,4 +42,12 @@ export const ProductLi = styled.li`
     font-size: 1rem;
     padding: 0;
   }
+`;
+
+export const Button = styled.button`
+  background: ${color.white};
+  border-radius: 0.2rem;
+  border: 0.1rem solid ${color.imperial};
+  padding: 0.8rem;
+  cursor: pointer;
 `;
