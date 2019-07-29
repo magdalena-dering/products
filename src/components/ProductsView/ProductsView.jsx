@@ -46,13 +46,11 @@ const ProductsView = () => {
                     <ProductUl>
                       <ProductLi>
                         <span>Name: </span>
-                        {valueName === null || "" ? productName : valueName}
+                        {valueName === "" ? productName : valueName}
                       </ProductLi>
                       <ProductLi>
                         <span>Number: </span>
-                        {valueNumber === null || ""
-                          ? productNumber
-                          : valueNumber}
+                        {valueNumber === "" ? productNumber : valueNumber}
                       </ProductLi>
                     </ProductUl>
                     <Link to={`/products/${productId}`}>Get details</Link>

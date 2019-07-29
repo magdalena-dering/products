@@ -3,7 +3,7 @@ import axios from "axios";
 import { Row, Col } from "react-grid-system";
 import { getProductId } from "../../utils/_utils";
 import { Wrapper, H1, ProductUl, ProductLi } from "../../assets/styles/styles";
-import { Card, IMG } from "./styles";
+import { Info, Card, Button } from "./styles";
 
 const ProductView = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -20,6 +20,14 @@ const ProductView = ({ match }) => {
   }, []);
 
   const productParam = getProductId(match.params.productId);
+
+  useEffect(() => {
+    localStorage.setItem(`productName_${productParam}`, valueName);
+    localStorage.setItem(`productNumber_${productParam}`, valueNumber);
+    localStorage.setItem(`productDesc_${productParam}`, valueDesc);
+    localStorage.setItem(`productImgName_01${productParam}`, valueImgName_01);
+    localStorage.setItem(`productImgName_02${productParam}`, valueImgName_02);
+  });
 
   const [valueName, setValue] = useState(
     localStorage.getItem(`productName_${productParam}`) || ""
@@ -38,20 +46,7 @@ const ProductView = ({ match }) => {
     localStorage.getItem(`productImgName_02${productParam}`) || ""
   );
 
-  useEffect(() => {
-    localStorage.setItem(`productName_${productParam}`, valueName);
-    localStorage.setItem(`productNumber_${productParam}`, valueNumber);
-    localStorage.setItem(`productDesc_${productParam}`, valueDesc);
-    localStorage.setItem(`productImgName_01${productParam}`, valueImgName_01);
-    localStorage.setItem(`productImgName_02${productParam}`, valueImgName_02);
-  }, [
-    productParam,
-    valueName,
-    valueNumber,
-    valueDesc,
-    valueImgName_01,
-    valueImgName_02
-  ]);
+  const clearLocalStorage = () => localStorage.clear();
 
   const onChangeName = event => setValue(event.target.value);
   const onChangeNumber = event => setValueNumber(event.target.value);
@@ -69,6 +64,7 @@ const ProductView = ({ match }) => {
           return (
             <Wrapper key={product.number}>
               <H1>Product detail</H1>
+              <Info>Enter mouse on text to edit it.</Info>
               <Row>
                 <Col lg={6}>
                   <Card>
@@ -101,7 +97,7 @@ const ProductView = ({ match }) => {
                               : valueImgName_01}
                           </p>
                           <input type="text" onChange={onChangeImgName01} />
-                          <IMG src={productImg01.url} alt="product-img" />
+                          <img src={productImg01.url} alt="product-img" />
                         </ProductLi>
                       )}
                       {productImg02 && (
@@ -113,10 +109,13 @@ const ProductView = ({ match }) => {
                               : valueImgName_02}
                           </p>
                           <input type="text" onChange={onChangeImgName02} />
-                          <IMG src={productImg02.url} alt="product-img" />
+                          <img src={productImg02.url} alt="product-img" />
                         </ProductLi>
                       )}
                     </ProductUl>
+                    <Button type="submit" onClick={clearLocalStorage}>
+                      Back to default info
+                    </Button>
                   </Card>
                 </Col>
               </Row>
