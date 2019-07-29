@@ -31,17 +31,28 @@ const ProductsView = () => {
             <p>No products</p>
           ) : (
             products.map(product => {
+              const productName = product.name;
               const productNumber = product.number;
               const productId = getProductId(productNumber);
+              const valueName = localStorage.getItem(
+                `productName_${getProductId(productNumber)}`
+              );
+              const valueNumber = localStorage.getItem(
+                `productNumber_${getProductId(productNumber)}`
+              );
               return (
                 <Col lg={4} key={productNumber} style={ColMargin}>
                   <Card>
                     <ProductUl>
                       <ProductLi>
-                        <span>Name:</span> {product.name}
+                        <span>Name: </span>
+                        {valueName === null || "" ? productName : valueName}
                       </ProductLi>
                       <ProductLi>
-                        <span>Number:</span> {productNumber}
+                        <span>Number: </span>
+                        {valueNumber === null || ""
+                          ? productNumber
+                          : valueNumber}
                       </ProductLi>
                     </ProductUl>
                     <Link to={`/products/${productId}`}>Get details</Link>
