@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col } from "react-grid-system";
 import { getProductId } from "../../utils/_utils";
-import { Wrapper, H1, ProductUl, ProductLi } from "../../assets/styles/styles";
-import { Info, Card, Button } from "./styles";
+import {
+  Wrapper,
+  H1,
+  ProductUl,
+  ProductLi,
+  Button
+} from "../../assets/styles/styles";
+import { Info } from "./styles";
 
 const ProductView = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -67,56 +73,52 @@ const ProductView = ({ match }) => {
               <Info>Enter mouse on text to edit it.</Info>
               <Row>
                 <Col lg={6}>
-                  <Card>
-                    <ProductUl>
+                  <ProductUl>
+                    <ProductLi>
+                      <span>Name: </span>
+                      <p>{valueName === "" ? product.name : valueName}</p>
+                      <input type="text" onChange={onChangeName} />
+                    </ProductLi>
+                    <ProductLi>
+                      <span>Number: </span>
+                      <p>{valueNumber === "" ? product.number : valueNumber}</p>
+                      <input type="text" onChange={onChangeNumber} />
+                    </ProductLi>
+                    <ProductLi>
+                      <span>Description: </span>
+                      <p>
+                        {valueDesc === "" ? product.description : valueDesc}
+                      </p>
+                      <input type="text" onChange={onChangeDesc} />
+                    </ProductLi>
+                    {productImg01 && (
                       <ProductLi>
-                        <span>Name: </span>
-                        <p>{valueName === "" ? product.name : valueName}</p>
-                        <input type="text" onChange={onChangeName} />
-                      </ProductLi>
-                      <ProductLi>
-                        <span>Number: </span>
+                        <span>Image name1: </span>
                         <p>
-                          {valueNumber === "" ? product.number : valueNumber}
+                          {valueImgName_01 === ""
+                            ? productImg01.name
+                            : valueImgName_01}
                         </p>
-                        <input type="text" onChange={onChangeNumber} />
+                        <input type="text" onChange={onChangeImgName01} />
+                        <img src={productImg01.url} alt="product-img" />
                       </ProductLi>
+                    )}
+                    {productImg02 && (
                       <ProductLi>
-                        <span>Description: </span>
+                        <span>Image name2: </span>
                         <p>
-                          {valueDesc === "" ? product.description : valueDesc}
+                          {valueImgName_02 === ""
+                            ? productImg02.name
+                            : valueImgName_02}
                         </p>
-                        <input type="text" onChange={onChangeDesc} />
+                        <input type="text" onChange={onChangeImgName02} />
+                        <img src={productImg02.url} alt="product-img" />
                       </ProductLi>
-                      {productImg01 && (
-                        <ProductLi>
-                          <span>Image name1: </span>
-                          <p>
-                            {valueImgName_01 === ""
-                              ? productImg01.name
-                              : valueImgName_01}
-                          </p>
-                          <input type="text" onChange={onChangeImgName01} />
-                          <img src={productImg01.url} alt="product-img" />
-                        </ProductLi>
-                      )}
-                      {productImg02 && (
-                        <ProductLi>
-                          <span>Image name2: </span>
-                          <p>
-                            {valueImgName_02 === ""
-                              ? productImg02.name
-                              : valueImgName_02}
-                          </p>
-                          <input type="text" onChange={onChangeImgName02} />
-                          <img src={productImg02.url} alt="product-img" />
-                        </ProductLi>
-                      )}
-                    </ProductUl>
-                    <Button type="submit" onClick={clearLocalStorage}>
-                      Back to default info
-                    </Button>
-                  </Card>
+                    )}
+                  </ProductUl>
+                  <Button type="submit" onClick={clearLocalStorage}>
+                    Back to default info
+                  </Button>
                 </Col>
               </Row>
             </Wrapper>

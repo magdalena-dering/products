@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Row, Col } from "react-grid-system";
 import { getProductId } from "../../utils/_utils";
-import { Wrapper, H1, ProductUl, ProductLi } from "../../assets/styles/styles";
-import { Card, ColMargin } from "./styles";
+import {
+  Wrapper,
+  H1,
+  ProductUl,
+  ProductLi,
+  Button
+} from "../../assets/styles/styles";
+import { Card, ColMargin, ImgWrapper, IMG } from "./styles";
 import Loader from "../Loader";
 
 const ProductsView = () => {
@@ -33,6 +38,8 @@ const ProductsView = () => {
             products.map(product => {
               const productName = product.name;
               const productNumber = product.number;
+              const productImg01 = product.images[0];
+              const productImg02 = product.images[1];
               const productId = getProductId(productNumber);
               const valueName = localStorage.getItem(
                 `productName_${getProductId(productNumber)}`
@@ -45,6 +52,16 @@ const ProductsView = () => {
                   <Card>
                     <ProductUl>
                       <ProductLi>
+                        {productImg01 && (
+                          <ImgWrapper>
+                            <IMG src={productImg01.url} alt="product-img" />
+                          </ImgWrapper>
+                        )}
+                        {productImg02 && (
+                          <ImgWrapper>
+                            <IMG src={productImg02.url} alt="product-img" />
+                          </ImgWrapper>
+                        )}
                         <span>Name: </span>
                         {valueName === "" ? productName : valueName}
                       </ProductLi>
@@ -53,7 +70,7 @@ const ProductsView = () => {
                         {valueNumber === "" ? productNumber : valueNumber}
                       </ProductLi>
                     </ProductUl>
-                    <Link to={`/products/${productId}`}>Get details</Link>
+                    <Button to={`/products/${productId}`}>Get details</Button>
                   </Card>
                 </Col>
               );
