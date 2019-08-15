@@ -21,6 +21,7 @@ export const ImgWrapper = styled.div`
 `;
 
 export const IMG = styled.img`
+  width: 100%;
   border-bottom: 0.1rem solid ${color.imperial};
   padding: 1rem;
 `;

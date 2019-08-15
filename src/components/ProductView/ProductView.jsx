@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col } from "react-grid-system";
 import { getProductId } from "../../utils/_utils";
-import {
-  Wrapper,
-  H1,
-  ProductUl,
-  ProductLi,
-  Button
-} from "../../assets/styles/styles";
+import { Wrapper, H1, ProductUl, ProductLi } from "../../assets/styles/styles";
 import { Info } from "./styles";
 
 const ProductView = ({ match }) => {
@@ -51,8 +45,6 @@ const ProductView = ({ match }) => {
   const [valueImgName_02, setValueImgName_02] = useState(
     localStorage.getItem(`productImgName_02${productParam}`) || ""
   );
-
-  const clearLocalStorage = () => localStorage.clear();
 
   const onChangeName = event => setValue(event.target.value);
   const onChangeNumber = event => setValueNumber(event.target.value);
@@ -116,9 +108,6 @@ const ProductView = ({ match }) => {
                       </ProductLi>
                     )}
                   </ProductUl>
-                  <Button type="submit" onClick={clearLocalStorage}>
-                    Back to default info
-                  </Button>
                 </Col>
               </Row>
             </Wrapper>

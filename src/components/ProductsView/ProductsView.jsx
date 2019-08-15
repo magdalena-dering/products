@@ -57,6 +57,7 @@ const ProductsView = () => {
                             <IMG src={productImg01.url} alt="product-img" />
                           </ImgWrapper>
                         )}
+                        {product.promo && <h4>{product.promo}</h4>}
                         {productImg02 && (
                           <ImgWrapper>
                             <IMG src={productImg02.url} alt="product-img" />
